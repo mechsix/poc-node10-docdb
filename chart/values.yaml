@@ -1,0 +1,11 @@
+imageInfo:
+  repo:
+  image:
+  tag:
+app:
+  name: poc-node10-docdb
+secrets:
+  DB_USER:
+  DB_PASS:
+  DB_HOST:
+  DB_NAME:

@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.app.name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+        date: "{{ now | unixEpoch }}"
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          image: "{{ .Values.imageInfo.repo }}/{{ .Values.imageInfo.image }}:{{ .Values.imageInfo.tag }}"
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: {{ .Values.app.name }}-secret
+      restartPolicy: OnFailure
